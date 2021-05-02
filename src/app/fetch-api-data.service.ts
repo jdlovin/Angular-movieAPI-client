@@ -82,10 +82,10 @@ export class UserLoginService {
   constructor(private http: HttpClient) {
   }
 
-  userLogin(): Observable<any> {
+  public userLogin(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    return this.http.post(apiUrl + `user/${user}`, {headers: new HttpHeaders(
+    return this.http.post(apiUrl + 'login', userDetails, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

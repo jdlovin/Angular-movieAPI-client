@@ -6,7 +6,6 @@ import { UserLoginService } from '../fetch-api-data.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
@@ -14,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserLoginFormComponent implements OnInit {
 
-  @Input() userData = { Username: '', Password: ''};
+  @Input() userData = { Username: '', Password: '' };
 
   constructor(
     public fetchApiData: UserLoginService,
@@ -22,10 +21,10 @@ export class UserLoginFormComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-  }
-  
+  }  
+
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subcribe((result) => {
+    this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       // Logic for a successful user login goes here
       this.dialogRef.close();
       this.snackBar.open(result, 'OK', {
