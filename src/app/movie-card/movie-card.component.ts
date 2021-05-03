@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GetMoviesService } from '../fetch-api-data.service';
+import { GenreViewComponent } from '../genre-view/genre-view.component';
 
 
 @Component({
@@ -9,7 +12,11 @@ import { GetMoviesService } from '../fetch-api-data.service';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
-  constructor(public fetchApiData: GetMoviesService) { }
+  constructor(
+    public fetchApiData: GetMoviesService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.getAllMovies();  
@@ -20,6 +27,13 @@ export class MovieCardComponent implements OnInit {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  showGenreDialog(name: string, description: string): void {
+    this.dialog.open(GenreViewComponent, {
+      data: { name, description },
+      width: "350px",
     });
   }
 }
