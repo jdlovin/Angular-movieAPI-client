@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GetMoviesService } from '../fetch-api-data.service';
 import { GenreViewComponent } from '../genre-view/genre-view.component';
-import {DirectorViewComponent} from '../director-view/director-view.component';
-import {SynopsisViewComponent} from '../synopsis-view/synopsis-view.component';
+import { DirectorViewComponent } from '../director-view/director-view.component';
+import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component';
 
 @Component({
   selector: 'app-movie-card',

@@ -1,3 +1,4 @@
+<app-navigation-bar></app-navigation-bar>
 <div>
   <mat-card>
     <mat-dialog-content>
@@ -7,6 +8,29 @@
       <mat-card-subtitle>
         Email: {{user.Email}}
       </mat-card-subtitle>
+      <button
+      mat-button
+      
+      color="primary"
+      >
+      Update Info
+      </button>
+      <button
+      mat-button
+      color="warn"
+      >
+      Deactivate account
+      </button>
     </mat-dialog-content>
   </mat-card>
+  <div>
+    <mat-card *ngFor="let favorite of favorites" style="flex: 1 1 auto">
+    <mat-card-title>
+      {{favorite.Title}}
+    </mat-card-title>
+    <mat-card-content>
+      <img src={{favorite.ImagePath}} alt={{favorite.Title}}/>
+    </mat-card-content>
+  </mat-card>
+  </div>
 </div>
