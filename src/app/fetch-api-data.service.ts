@@ -242,6 +242,45 @@ export class GetUserService {
     'Something bad happened');
   }
 }
+// Adds user favorite movie
+@Injectable({
+  providedIn: 'root'
+})
+export class AddMovieService {
+  constructor(private http: HttpClient) {
+  }
+
+  addFavMovie(_id: string): Observable<any> {
+    const token = localStorage.getItem('item');
+    const user = localStorage.getItem('user');
+    return this.http.post(apiUrl + `users/${user}/movies/${_id}`, _id, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
+  // non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || { };
+}
+  private handleError(error: HttpErrorResponse): any{
+  if (error.error instanceof ErrorEvent) {
+    console.error('Some error occurred:', error.error.message);
+  } else {
+    console.error(
+      `Error Status code ${error.status}, ` +
+      `Error body is: ${error.error}`)
+  }
+  return throwError(
+    'Something bad happened');
+  }
+}
+
+
+
 // Deletes user favorite movies
 @Injectable({
   providedIn: 'root'
@@ -253,7 +292,7 @@ export class GetFavMovieService {
   userFavMovie(_id: string): Observable<any> {
     const token = localStorage.getItem('item');
     const user = localStorage.getItem('user');
-    return this.http.delete(apiUrl + `user/${user}/movies/${_id}`, {headers: new HttpHeaders(
+    return this.http.delete(apiUrl + `users/${user}/movies/${_id}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

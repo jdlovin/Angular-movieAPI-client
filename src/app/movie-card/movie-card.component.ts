@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GetMoviesService } from '../fetch-api-data.service';
+import { GetMoviesService, AddMovieService } from '../fetch-api-data.service';
 import { GenreViewComponent } from '../genre-view/genre-view.component';
 import { DirectorViewComponent } from '../director-view/director-view.component';
 import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component';
@@ -12,9 +12,12 @@ import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component'
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
+  user: any = {};
   movies: any[] = [];
+  favorites: any = [];
   constructor(
     public fetchApiData: GetMoviesService,
+    public fetchApiData2: AddMovieService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
     ) { }
@@ -49,6 +52,19 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(SynopsisViewComponent, {
       data: { title, description },
       width: "350px",
+    });
+  }
+
+  addFavoriteMovie(_id: string): void {
+    this.fetchApiData2.addFavMovie(_id).subscribe(() => {
+      this.snackBar.open(
+        'Movie has been added', "OK", {
+          duration: 2000,
+        }
+      );
+      setTimeout(function() {
+        window.location.reload();
+      }, 1000);
     });
   }
 }
