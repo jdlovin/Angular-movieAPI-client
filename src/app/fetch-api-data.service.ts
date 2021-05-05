@@ -361,10 +361,10 @@ export class EditUserService {
 export class DeleteUserService {
   constructor(private http: HttpClient){
   }
-  userDelete(): Observable<any> {
+  userDelete(username: string): Observable<any> {
     const token = localStorage.getItem('item');
     const user = localStorage.getItem('user');
-    return this.http.delete(apiUrl + `user/${user}`, {headers: new HttpHeaders(
+    return this.http.delete(apiUrl + `users/${user}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(

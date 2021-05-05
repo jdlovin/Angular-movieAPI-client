@@ -8,6 +8,7 @@ import {
   GetMoviesService,
   DeleteUserService
 } from '../fetch-api-data.service';
+import { Router } from '@angular/router'; 
 import { UserInfoUpdateComponent } from '../user-info-update/user-info-update.component';
 
 
@@ -27,7 +28,8 @@ export class ProfileViewComponent implements OnInit {
     public fetchApiData4: DeleteUserService,
     public fetchApiData5: GetMoviesService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public router: Router
     ) { }
 
   ngOnInit(): void {
@@ -73,6 +75,22 @@ this.fetchApiData2.userFavMovie(_id).subscribe(() =>{
     window.location.reload();
   }, 1000);
 });
+  }
+
+  removeUser(username: string): void {
+    this.fetchApiData4.userDelete(username).subscribe(() => {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      this.snackBar.open(
+        "Profile has been deleted", "Ok", {
+          duration: 2000,
+        }
+      );
+      setTimeout(function() {
+        window.location.reload();
+      }, 1000);
+    });
+    this.router.navigate(['welcome']);
   }
 
 }
