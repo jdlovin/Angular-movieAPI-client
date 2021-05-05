@@ -10,7 +10,7 @@
       </mat-card-subtitle>
       <button
       mat-button
-      
+      (click)="openUserUpdateDialog()"
       color="primary"
       >
       Update Info
@@ -31,6 +31,13 @@
     <mat-card-content>
       <img src={{favorite.ImagePath}} alt={{favorite.Title}}/>
     </mat-card-content>
+    <button
+    mat-button
+    (click)="openUserUpdateDialog()"
+    color="warn"
+    >
+    Remove from favorites
+    </button>
   </mat-card>
   </div>
 </div>

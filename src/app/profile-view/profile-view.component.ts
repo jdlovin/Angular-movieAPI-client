@@ -8,6 +8,7 @@ import {
   GetMoviesService,
   DeleteUserService
 } from '../fetch-api-data.service';
+import { UserInfoUpdateComponent } from '../user-info-update/user-info-update.component';
 
 
 @Component({
@@ -54,4 +55,24 @@ export class ProfileViewComponent implements OnInit {
     this.user.FavoriteMovies.includes(movie._id));
     return this.favorites;
   }
+
+  openUserUpdateDialog(): void {
+    this.dialog.open(UserInfoUpdateComponent, {
+      width: '280px'
+    });
+  }
+
+  removeFavorite(_id: string): void {
+this.fetchApiData2.userFavMovie(_id).subscribe(() =>{
+  this.snackBar.open(
+    `Movie has been removed`, "OK", {
+      duration: 2000,
+    }
+  );
+  setTimeout(function() {
+    window.location.reload();
+  }, 1000);
+});
+  }
+
 }

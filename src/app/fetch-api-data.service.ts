@@ -84,20 +84,9 @@ export class UserLoginService {
   }
 
   public userLogin(userDetails: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    return this.http.post(apiUrl + 'login', userDetails, {headers: new HttpHeaders(
-      {
-        Authorization: 'Bearer ' + token,
-      })}).pipe(
-        map(this.extractResponseData),
+    return this.http.post(apiUrl + 'login', userDetails).pipe(
         catchError(this.handleError)
       );
-  }
-   // non-typed response extraction
-   private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || { };
   }
   private handleError(error: HttpErrorResponse): any{
     if (error.error instanceof ErrorEvent) {
@@ -261,10 +250,10 @@ export class GetFavMovieService {
   constructor(private http: HttpClient) {
   }
 
-  userFavMovie(): Observable<any> {
+  userFavMovie(_id: string): Observable<any> {
     const token = localStorage.getItem('item');
     const user = localStorage.getItem('user');
-    return this.http.delete(apiUrl + `user/${user}`, {headers: new HttpHeaders(
+    return this.http.delete(apiUrl + `user/${user}/movies/${_id}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -297,10 +286,11 @@ export class EditUserService {
   constructor(private http: HttpClient) {
   }
 
-  userEditInfo(): Observable<any> {
+  userEditInfo(userDetails: any): Observable<any> {
     const token = localStorage.getItem('item');
     const user = localStorage.getItem('user');
-    return this.http.put(apiUrl + `user/${user}`, {headers: new HttpHeaders(
+    console.log(userDetails);
+    return this.http.put(apiUrl + `user/${user}`, userDetails,  {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
