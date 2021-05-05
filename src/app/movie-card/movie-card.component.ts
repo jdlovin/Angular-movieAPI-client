@@ -25,7 +25,7 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMovies();  
   }
-
+  
   getAllMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -34,6 +34,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param name 
+   * @param description 
+   */
   showGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreViewComponent, {
       data: { name, description },
@@ -41,6 +46,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param name 
+   * @param bio 
+   * @param birth 
+   */
   showDirectorDialog(name: string, bio: string, birth: string ): void {
     this.dialog.open(DirectorViewComponent, {
       data: { name, bio, birth },
@@ -48,6 +59,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param title 
+   * @param description 
+   */
   showSynopsisDialog(title: string, description: string): void {
     this.dialog.open(SynopsisViewComponent, {
       data: { title, description },
@@ -55,6 +71,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param _id 
+   */
   addFavoriteMovie(_id: string): void {
     this.fetchApiData2.addFavMovie(_id).subscribe(() => {
       this.snackBar.open(

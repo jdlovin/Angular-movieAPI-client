@@ -36,8 +36,8 @@ export class UserRegistrationService {
     return throwError(
       'Something bad happened');
   }
-
 }
+
 // Gets all movies
 @Injectable({
   providedIn: 'root'
@@ -73,8 +73,8 @@ export class GetMoviesService {
       return throwError(
         'Something bad happened');
     }
-
 }
+
 // get user to login
 @Injectable({
   providedIn: 'root'

@@ -36,6 +36,9 @@ export class ProfileViewComponent implements OnInit {
     this.getAUser();
   }
 
+  /**
+   * Gets user info
+   */
   getAUser(): void {
     this.fetchApiData.userInfo().subscribe((resp: any) => {
       this.user = resp;
@@ -45,6 +48,9 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetches movies for user favorite movies
+   */
   getMovies(): void {
     this.fetchApiData5.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -52,6 +58,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @returns user favorite movies
+   */
   filterFavorites(): void {
     this.favorites = this.movies.filter((movie: any) =>
     this.user.FavoriteMovies.includes(movie._id));
@@ -64,6 +74,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param _id 
+   */
   removeFavorite(_id: string): void {
 this.fetchApiData2.userFavMovie(_id).subscribe(() =>{
   this.snackBar.open(
@@ -77,6 +91,10 @@ this.fetchApiData2.userFavMovie(_id).subscribe(() =>{
 });
   }
 
+  /**
+   * 
+   * @param username 
+   */
   removeUser(username: string): void {
     this.fetchApiData4.userDelete(username).subscribe(() => {
       localStorage.removeItem('user');

@@ -21,6 +21,9 @@ export class UserInfoUpdateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * LEts a user edit their info
+   */
   editUser(): void {
     this.fetchApiData.userEditInfo(this.userData).subscribe((result) => {
       this.dialogRef.close();
