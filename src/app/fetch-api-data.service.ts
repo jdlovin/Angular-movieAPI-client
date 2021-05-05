@@ -83,8 +83,8 @@ export class UserLoginService {
   constructor(private http: HttpClient) {
   }
 
-  public userLogin(userDetails: any): Observable<any> {
-    return this.http.post(apiUrl + 'login', userDetails).pipe(
+  public userLogin(userData: any): Observable<any> {
+    return this.http.post(apiUrl + 'login', userData).pipe(
         catchError(this.handleError)
       );
   }
